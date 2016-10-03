@@ -1,5 +1,5 @@
 (function() {
-'use-strict'
+'use-strict';
 
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
@@ -16,7 +16,7 @@ function FoundItemsDirective () {
 			errorMsg: '<'
 		},
 		controller: NarrowItDownController,
-		controllerAs: ctrl,
+		controllerAs: 'ctrl',
 		bindToController: true,
 	};
 
@@ -29,23 +29,28 @@ function NarrowItDownController (MenuSearchService) {
 
 	ctrl.searchTerm = '';
 	ctrl.found = [];
-	ctrl.errorMsg = '';
+	ctrl.errorMsg = false;
 
 	ctrl.getItems = function () {
 		console.log(ctrl.searchTerm);
-		var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
+		var promise = MenuSearchService.getMatchedMenuItems(ctrl.searchTerm);
 
 		promise.then(function (response) {
-			ctrl.found = response.data;
+			if (response.length !== 0){
+				ctrl.errorMsg = false;
+				ctrl.found = response;
+			} else {
+				ctrl.errorMsg = true;
+			}
 		})
 		.catch (function (error) {
 			console.log("Something went terribly wrong!");
-			ctrl.errorMsg = error;
+			ctrl.errorMsg = true;
 		});
 	};
 
 	ctrl.removeItem = function (index) {
-
+		ctrl.found.splice(index, 1);
 	};
 }
 
@@ -61,10 +66,10 @@ function MenuSearchService ($http, ApiBasePath) {
 			var allItems = result.data.menu_items;
 			var foundItems = [];
 			console.log(allItems);
-			for (var i = 0; allItems.length; i++) {
-				var curDescription = allItem[i].description.toLowerCase();
+			for (var i = 0; i < allItems.length; i++) {
+				var curDescription = allItems[i].description.toLowerCase();
 				if (curDescription.indexOf(searchTerm.toLowerCase()) !== -1) {
-					foundItems.push(allItem[i]);
+					foundItems.push(allItems[i]);
 				}
 			}
 			return foundItems;

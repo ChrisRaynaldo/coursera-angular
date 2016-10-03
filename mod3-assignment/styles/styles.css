@@ -5,6 +5,12 @@ input[type="text"] {
   width: 200px;
   float: left;
 }
+#list-of-menu{
+  clear: left;
+}
+.remove-button {
+  margin-bottom: 15px;
+}
 .narrow-button {
   float: left;
   margin-left: 10px;
