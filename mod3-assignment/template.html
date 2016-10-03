@@ -1,9 +1,11 @@
-<div id="list-of-menu">
-  <ol ng-if='!ctrl.errorMsg'>
+<div ng-if="!ctrl.errorMsg" id="list-of-menu">
+  <ol>
     <li ng-repeat="item in ctrl.items " >
-      <div> Name: {{item.name}} <br> Short Name: {{item.short_name}} </div>
-      <div>Description: {{item.description}}</div>
-      <button class="remove-button" ng-click="ctrl.onRemove({index: $index});">Remove Item</button>
+      <div> <strong>Name:</strong> {{item.name}} <br> <strong>Short Name:</strong> {{item.short_name}} </div>
+      <div> <strong>Description:</strong> {{item.description}}</div>
+      <button class="remove-button" ng-click="ctrl.onRemove({index: $index});">Don't want this one</button>
     </li>
   </ol>
 </div>
+
+<div ng-if="ctrl.errorMsg" class="error">Nothing found</div>

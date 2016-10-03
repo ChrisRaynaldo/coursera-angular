@@ -20,10 +20,10 @@
     </div>
 
     <!-- Bonus loader (see Bonus section of the assignment) -->
-    <items-loader-indicator></items-loader-indicator>
+    <!-- <items-loader-indicator></items-loader-indicator> -->
 
     <!-- found-items should be implemented as a component -->
-    <found-items items="ctrl.found" on-remove="ctrl.removeItem(index)"></found-items>
+    <found-items items="ctrl.found" on-remove="ctrl.removeItem(index)" error-msg="ctrl.errorMsg"></found-items>
   </div>
 
 </body>

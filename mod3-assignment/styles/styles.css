@@ -15,6 +15,11 @@ input[type="text"] {
   float: left;
   margin-left: 10px;
 }
+.error {
+  clear: left;
+  font-weight: bold;
+  color: red;
+}
 .loader {
   display: none;
   margin-left: 5px;
