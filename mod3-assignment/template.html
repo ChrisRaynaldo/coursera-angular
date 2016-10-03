@@ -1,0 +1,8 @@
+<ol ng-if='!ctrl.errorMsg'>
+  <li ng-repeat="item in ctrl.items " >
+    <div class='name'> name: {{item.name}} short name: {{item.short_name}} </div>
+    <div class='description'>{{item.description}}</div>
+    <button ng-click="ctrl.onRemove({index: $index});">Remove Item</button>
+  </li>
+</ol>
+<div ng-if='ctrl.errorMsg' class='error'>{{ ctrl.errorMsg }}</div>
