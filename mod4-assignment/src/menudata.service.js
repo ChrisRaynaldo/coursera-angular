@@ -1,32 +1,31 @@
 (function () {
-'use-strict';
+'use strict';
 
 angular.module('data')
 .service('MenuDataService', MenuDataService)
 .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
 
-MenuDataService.$inject = ['$http', 'ApiBasePath'];
+MenuDataService.$inject = ['$http','ApiBasePath' ]
 function MenuDataService($http, ApiBasePath) {
   var service = this;
 
-  service.getAllCategories = function () {
-    var promise = $http({
+  service.getAllCategories = function (){
+    console.log('service');
+    return $http({
       method: "GET",
       url: (ApiBasePath + "/categories.json")
     });
-
-    return promise;
   };
+  service.getItemsForCategory = function(catShortName) {
+      return $http({
+        method: "GET",
+        url: (ApiBasePath + "/menu_items.json"),
+        params: {
+          category: catShortName
+        }
+      });
+    };
 
-  service.getItemsForCategory = function (categoryShortName) {
-    return $http({
-      method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
-      params: {
-        category: categoryShortName
-      }
-    });
-  };
 }
 
 })();

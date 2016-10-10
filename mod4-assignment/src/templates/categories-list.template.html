@@ -1,5 +1,6 @@
-<a ui-sref="home">Home</a>
-
-<h4>All Categories</h4>
-<categories items="categoriesList.items"></categories>
-<ui-view></ui-view>
+<ul>
+  <li ng-repeat="item in $ctrl.items"
+  ui-sref="categoriesList.menuItems({catShortName: item.short_name})">
+    {{ item.name }} {{item.short_name}}
+  </li>
+</ul>
